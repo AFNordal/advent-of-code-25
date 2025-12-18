@@ -6,11 +6,3 @@ else:
 with open(s) as f:
     lines = list(l.strip() for l in f.readlines())
 
-key = 0
-for l in lines:
-    nums = list(map(int, l))
-    d1i = nums.index(max(nums[:-1]))
-    d2 = max(nums[d1i+1:])
-    key += nums[d1i]*10 + d2
-print(key)
-
