@@ -1,0 +1,31 @@
+#!/bin/sh
+
+# Find the highest numeric directory name in the current directory
+max=0
+for d in */; do
+    d=${d%/}               # remove trailing slash
+    case "$d" in
+        ''|*[!0-9]*) ;;    # skip non-numeric names
+        *)
+            if [ "$d" -gt "$max" ]; then
+                max="$d"
+            fi
+            ;;
+    esac
+done
+
+# Compute n+1
+next=$((max + 1))
+
+# Create the new directory
+mkdir "$next" || exit 1
+
+# Copy t.py into it
+cp t.py "$next/t1.py"
+cp t.py "$next/t2.py"
+
+# Create empty input.txt and test.txt
+: > "$next/input.txt"
+: > "$next/test.txt"
+
+echo "Created directory $next"
